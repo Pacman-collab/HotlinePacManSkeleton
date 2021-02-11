@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
       scoreCheck();
+       rigidbody2d = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -22,6 +23,17 @@ public class PlayerController : MonoBehaviour
     {
         Checkinput();
         Move();
+        horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
+    }
+
+     void FixedUpdate()
+    {
+        Vector2 position = rigidbody2d.position;
+        position.x = position.x + 3.0f * horizontal * Time.deltaTime;
+        position.y = position.y + 3.0f * vertical * Time.deltaTime;
+
+        rigidbody2d.MovePosition(position);
     }
 
     
